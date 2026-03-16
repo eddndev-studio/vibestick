@@ -72,4 +72,8 @@
   body {
     @apply bg-void text-body font-sans antialiased;
   }
+
+  h1, h2, h3 {
+    word-spacing: 0.15em;
+  }
 }
