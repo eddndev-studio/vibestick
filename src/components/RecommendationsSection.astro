@@ -1,0 +1,307 @@
+---
+const recommendations = [
+    {
+        title: "Oficinas y Espacios de Trabajo",
+        description:
+            "Las oficinas acumulan COVs de mobiliario, impresoras y productos de limpieza. El sticker actúa como purificador pasivo constante.",
+        icon: "M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21",
+        accent: "primary",
+    },
+    {
+        title: "Transporte y Vehículos",
+        description:
+            "El interior de autos y transporte público concentra altos niveles de PM2.5 por el tráfico. Ideal para superficies interiores del vehículo.",
+        icon: "M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H21M3.375 14.25h-.375a3 3 0 013-3V7.5a3 3 0 013-3h7.5a3 3 0 013 3v.75m-9 0h9m-9 0v3.375m0 0V14.25",
+        accent: "secondary",
+    },
+    {
+        title: "Escuelas y Universidades",
+        description:
+            "Los espacios educativos necesitan aire limpio para el rendimiento cognitivo. Laboratorios y aulas son ubicaciones prioritarias.",
+        icon: "M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5",
+        accent: "primary",
+    },
+    {
+        title: "Hospitales y Clínicas",
+        description:
+            "La calidad del aire en entornos de salud es crítica. El sticker complementa los sistemas HVAC reduciendo contaminantes residuales.",
+        icon: "M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z",
+        accent: "secondary",
+    },
+    {
+        title: "Hogares con Poca Ventilación",
+        description:
+            "Departamentos y casas con ventilación limitada acumulan COVs de cocina, productos de limpieza y materiales de construcción.",
+        icon: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
+        accent: "primary",
+    },
+    {
+        title: "Zonas Industriales y Talleres",
+        description:
+            "Áreas cercanas a fábricas o talleres mecánicos presentan niveles elevados de PM y COVs. Aplicar en ventanas y superficies expuestas.",
+        icon: "M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l5.653-4.655m3.586-3.586a2.548 2.548 0 113.586 3.586M11.42 15.17l3.59-3.59m-7.178 7.178L3.75 21M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591",
+        accent: "secondary",
+    },
+];
+
+const topAlcaldias = [
+    {
+        name: "Iztapalapa",
+        pm25: 30.5,
+        reason: "Mayor población y actividad industrial",
+    },
+    {
+        name: "Gustavo A. Madero",
+        pm25: 28.3,
+        reason: "Zona industrial y alto tráfico vehicular",
+    },
+    {
+        name: "Azcapotzalco",
+        pm25: 27.4,
+        reason: "Corredor industrial histórico",
+    },
+    {
+        name: "Venustiano Carranza",
+        pm25: 26.1,
+        reason: "Proximidad al aeropuerto y vías principales",
+    },
+    {
+        name: "Iztacalco",
+        pm25: 25.9,
+        reason: "Alta densidad urbana y tráfico pesado",
+    },
+];
+---
+
+<section
+    id="recommendations-section"
+    class="relative w-full py-32 pointer-events-auto overflow-hidden"
+>
+    <!-- Decorative Background -->
+    <div
+        class="rec-glow-1 absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-primary/5 blur-[100px] pointer-events-none opacity-0"
+    ></div>
+    <div
+        class="rec-glow-2 absolute bottom-[15%] left-[-10%] w-[30vw] h-[30vw] rounded-full bg-secondary/5 blur-[100px] pointer-events-none opacity-0"
+    ></div>
+
+    <!-- Accent Lines -->
+    <div
+        class="rec-line absolute top-[18%] right-0 w-[20%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent pointer-events-none opacity-0"
+    ></div>
+    <div
+        class="rec-line absolute bottom-[22%] left-0 w-[25%] h-[1px] bg-gradient-to-r from-transparent via-secondary/20 to-transparent pointer-events-none opacity-0"
+    ></div>
+
+    <div class="container mx-auto px-6 md:px-12 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-16 rec-header opacity-0 translate-y-10">
+            <div class="w-16 h-[2px] bg-primary mx-auto mb-6"></div>
+            <h2
+                class="text-4xl md:text-5xl font-black uppercase tracking-tight text-white mb-4"
+            >
+                ¿Dónde Pegar<br />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+                >
+                    tu Eheco-Stick?
+                </span>
+            </h2>
+            <p class="text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+                Basado en los datos de contaminación de la CDMX, estas son las
+                zonas y espacios donde tu sticker tendrá el mayor impacto
+                purificador.
+            </p>
+        </div>
+
+        <!-- Top Alcaldías (Data-driven) -->
+        <div class="rec-top-alcaldias opacity-0 translate-y-10 mb-16">
+            <h3
+                class="text-2xl md:text-3xl font-bold text-white uppercase tracking-tight text-center mb-8"
+            >
+                <span class="w-2 h-2 rounded-full bg-red-500 inline-block mr-2"
+                ></span>
+                Alcaldías Prioritarias
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                {
+                    topAlcaldias.map((alc, i) => (
+                        <div class="group p-5 rounded-xl bg-white/5 border border-white/10 hover:border-red-500/30 transition-all duration-300 space-y-3">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="text-3xl font-black text-white/20 group-hover:text-red-500/40 transition-colors"
+                                >
+                                    {i + 1}
+                                </span>
+                                <h4 class="text-white font-bold text-sm leading-tight">
+                                    {alc.name}
+                                </h4>
+                            </div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-2xl font-black text-red-400">
+                                    {alc.pm25}
+                                </span>
+                                <span class="text-xs text-muted">μg/m³ PM2.5</span>
+                            </div>
+                            <p class="text-xs text-muted leading-relaxed">
+                                {alc.reason}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Recommended Spaces -->
+        <div class="rec-spaces opacity-0 translate-y-10">
+            <h3
+                class="text-2xl md:text-3xl font-bold text-white uppercase tracking-tight text-center mb-8"
+            >
+                <span
+                    class="w-2 h-2 rounded-full bg-primary inline-block mr-2"
+                ></span>
+                Espacios Recomendados
+            </h3>
+
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+                {
+                    recommendations.map((rec) => (
+                        <div
+                            class={`group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-${rec.accent}/40 transition-all duration-300 space-y-4`}
+                        >
+                            <div
+                                class={`w-12 h-12 rounded-lg bg-${rec.accent}/10 flex items-center justify-center group-hover:bg-${rec.accent}/20 transition-colors`}
+                            >
+                                <svg
+                                    class={`w-6 h-6 text-${rec.accent}`}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d={rec.icon}
+                                    />
+                                </svg>
+                            </div>
+                            <h4 class="text-white font-bold text-lg">
+                                {rec.title}
+                            </h4>
+                            <p class="text-muted text-sm leading-relaxed">
+                                {rec.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- CTA Box -->
+        <div
+            class="rec-cta opacity-0 translate-y-10 mt-16 p-8 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 text-center"
+        >
+            <h3
+                class="text-xl md:text-2xl font-bold text-white mb-3"
+            >
+                Cada sticker cuenta
+            </h3>
+            <p class="text-muted leading-relaxed max-w-2xl mx-auto">
+                Un solo Eheco-Stick puede degradar hasta el
+                <span class="text-primary font-bold">70% de los COVs</span> en su
+                entorno cercano. Imagina el impacto de miles de stickers en las
+                alcaldías más contaminadas de la ciudad.
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#recommendations-section",
+            start: "top 60%",
+            end: "bottom 40%",
+            toggleActions: "play none none reverse",
+        },
+    });
+
+    tl.to(".rec-header", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    tl.to(
+        ".rec-top-alcaldias",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+        },
+        "-=0.4",
+    );
+
+    tl.to(
+        ".rec-spaces",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+        },
+        "-=0.4",
+    );
+
+    tl.to(
+        ".rec-cta",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+        },
+        "-=0.4",
+    );
+
+    // Decorative animations
+    const decorTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#recommendations-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
+        },
+    });
+
+    decorTl.fromTo(
+        ".rec-glow-1",
+        { opacity: 0, x: "20%" },
+        { opacity: 1, x: "-10%", ease: "none" },
+    );
+
+    decorTl.fromTo(
+        ".rec-glow-2",
+        { opacity: 0, x: "-20%" },
+        { opacity: 1, x: "10%", ease: "none" },
+        0,
+    );
+
+    decorTl.fromTo(
+        ".rec-line",
+        { opacity: 0, scaleX: 0 },
+        { opacity: 1, scaleX: 1, ease: "power1.out", stagger: 0.2 },
+        0.1,
+    );
+</script>

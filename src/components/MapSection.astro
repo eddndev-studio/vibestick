@@ -1,0 +1,556 @@
+---
+
+---
+
+<!-- Leaflet CSS -->
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+/>
+
+<section
+    id="map-section"
+    class="relative w-full py-32 pointer-events-auto overflow-hidden"
+>
+    <!-- Decorative Background -->
+    <div
+        class="map-glow-1 absolute top-[10%] left-[-8%] w-[30vw] h-[30vw] rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none opacity-0"
+    ></div>
+    <div
+        class="map-glow-2 absolute bottom-[5%] right-[-8%] w-[25vw] h-[25vw] rounded-full bg-secondary/5 blur-[100px] pointer-events-none opacity-0"
+    ></div>
+
+    <div class="container mx-auto px-6 md:px-12 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-12 map-header opacity-0 translate-y-10">
+            <div class="w-16 h-[2px] bg-cyan-500 mx-auto mb-6"></div>
+            <h2
+                class="text-4xl md:text-5xl font-black uppercase tracking-tight text-white mb-4"
+            >
+                Mapa de<br />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500"
+                >
+                    Contaminación CDMX
+                </span>
+            </h2>
+            <p class="text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+                Visualiza los niveles de contaminación por alcaldía en la Ciudad de
+                México. Datos basados en la Red de Monitoreo Atmosférico
+                (RAMA&nbsp;—&nbsp;SEDEMA).
+            </p>
+        </div>
+
+        <!-- Pollutant Toggle -->
+        <div
+            class="map-controls opacity-0 translate-y-10 flex justify-center gap-3 mb-8"
+        >
+            <button
+                id="btn-pm25"
+                class="pollutant-btn active px-5 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-cyan-500/20 text-cyan-400 border border-cyan-500/40"
+            >
+                PM2.5
+            </button>
+            <button
+                id="btn-pm10"
+                class="pollutant-btn px-5 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-white/5 text-muted border border-white/10 hover:border-white/20"
+            >
+                PM10
+            </button>
+        </div>
+
+        <!-- Map + Info Panel -->
+        <div
+            class="map-container-wrapper opacity-0 translate-y-10 grid grid-cols-1 lg:grid-cols-4 gap-6"
+        >
+            <!-- Map -->
+            <div class="lg:col-span-3">
+                <div
+                    id="pollution-map"
+                    class="w-full rounded-xl overflow-hidden border border-white/10"
+                    style="height: 520px;"
+                >
+                </div>
+            </div>
+
+            <!-- Side Panel -->
+            <div class="space-y-4">
+                <!-- Info Panel (updates on hover) -->
+                <div
+                    id="alcaldia-info"
+                    class="p-5 rounded-xl bg-white/5 border border-white/10 space-y-3"
+                >
+                    <h4
+                        class="text-sm uppercase tracking-wider text-cyan-400 font-bold"
+                    >
+                        Selecciona una alcaldía
+                    </h4>
+                    <p id="alcaldia-name" class="text-xl font-bold text-white">
+                        —
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-muted text-sm">PM2.5</span>
+                            <span
+                                id="info-pm25"
+                                class="text-white font-bold text-sm">— μg/m³</span
+                            >
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-muted text-sm">PM10</span>
+                            <span
+                                id="info-pm10"
+                                class="text-white font-bold text-sm">— μg/m³</span
+                            >
+                        </div>
+                        <div
+                            class="pt-2 mt-2 border-t border-white/10 flex justify-between items-center"
+                        >
+                            <span class="text-muted text-sm">Nivel</span>
+                            <span
+                                id="info-level"
+                                class="font-bold text-sm text-muted">—</span
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div
+                    class="p-5 rounded-xl bg-white/5 border border-white/10 space-y-3"
+                >
+                    <h4
+                        class="text-sm uppercase tracking-wider text-white/70 font-bold"
+                    >
+                        Nivel de contaminación
+                    </h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="w-4 h-4 rounded shrink-0"
+                                style="background:#ef4444;"></span>
+                            <span class="text-muted text-xs">Muy Alta (&gt;28)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="w-4 h-4 rounded shrink-0"
+                                style="background:#f97316;"></span>
+                            <span class="text-muted text-xs">Alta (24–28)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="w-4 h-4 rounded shrink-0"
+                                style="background:#eab308;"></span>
+                            <span class="text-muted text-xs">Media (20–24)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="w-4 h-4 rounded shrink-0"
+                                style="background:#22c55e;"></span>
+                            <span class="text-muted text-xs">Moderada (16–20)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="w-4 h-4 rounded shrink-0"
+                                style="background:#06b6d4;"></span>
+                            <span class="text-muted text-xs">Baja (&lt;16)</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-muted/60 pt-2 border-t border-white/5">
+                        Unidades: μg/m³ · Promedio anual
+                    </p>
+                </div>
+
+                <!-- Top Alcaldías -->
+                <div
+                    class="p-5 rounded-xl bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/20 space-y-3"
+                >
+                    <h4
+                        class="text-sm uppercase tracking-wider text-red-400 font-bold"
+                    >
+                        Más contaminadas
+                    </h4>
+                    <ol class="space-y-1.5" id="top-alcaldias">
+                        <li class="flex justify-between text-sm">
+                            <span class="text-white">1. Iztapalapa</span>
+                            <span class="text-red-400 font-bold">30.5</span>
+                        </li>
+                        <li class="flex justify-between text-sm">
+                            <span class="text-white">2. Gustavo A. Madero</span>
+                            <span class="text-red-400 font-bold">28.3</span>
+                        </li>
+                        <li class="flex justify-between text-sm">
+                            <span class="text-white">3. Azcapotzalco</span>
+                            <span class="text-orange-400 font-bold">27.4</span>
+                        </li>
+                        <li class="flex justify-between text-sm">
+                            <span class="text-white">4. Venustiano Carranza</span>
+                            <span class="text-orange-400 font-bold">26.1</span>
+                        </li>
+                        <li class="flex justify-between text-sm">
+                            <span class="text-white">5. Iztacalco</span>
+                            <span class="text-orange-400 font-bold">25.9</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Source -->
+        <div class="mt-6 text-center">
+            <p class="text-xs text-muted/50">
+                Fuente: Red Automática de Monitoreo Atmosférico (RAMA) — SEDEMA,
+                Gobierno de la Ciudad de México · datos.cdmx.gob.mx · Promedios
+                anuales por estación de monitoreo, mapeados a alcaldías.
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Leaflet popup dark theme override */
+    :global(.leaflet-popup-content-wrapper) {
+        background: rgba(15, 18, 33, 0.95) !important;
+        color: #f1f5f9 !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+        backdrop-filter: blur(10px);
+    }
+
+    :global(.leaflet-popup-tip) {
+        background: rgba(15, 18, 33, 0.95) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    :global(.leaflet-popup-content) {
+        margin: 12px 16px !important;
+        font-family: "Outfit", sans-serif !important;
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+    }
+
+    :global(.popup-title) {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 8px;
+        color: #ffffff;
+    }
+
+    :global(.popup-row) {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 2px 0;
+    }
+
+    :global(.popup-label) {
+        color: #94a3b8;
+    }
+
+    :global(.popup-value) {
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    :global(.leaflet-control-attribution) {
+        background: rgba(15, 18, 33, 0.7) !important;
+        color: #64748b !important;
+        font-size: 10px !important;
+    }
+
+    :global(.leaflet-control-attribution a) {
+        color: #94a3b8 !important;
+    }
+
+    :global(.leaflet-control-zoom a) {
+        background: rgba(15, 18, 33, 0.9) !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    :global(.leaflet-control-zoom a:hover) {
+        background: rgba(30, 35, 60, 0.95) !important;
+    }
+</style>
+
+<script>
+    import L from "leaflet";
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- Pollution Data (SEDEMA/RAMA annual averages, mapped to alcaldías) ---
+    const pollutionData: Record<
+        string,
+        { pm25: number; pm10: number }
+    > = {
+        Azcapotzalco: { pm25: 27.4, pm10: 50.6 },
+        "Benito Juárez": { pm25: 21.0, pm10: 39.8 },
+        Coyoacán: { pm25: 20.5, pm10: 38.2 },
+        "Cuajimalpa de Morelos": { pm25: 15.8, pm10: 30.2 },
+        Cuauhtémoc: { pm25: 24.7, pm10: 45.3 },
+        "Gustavo A. Madero": { pm25: 28.3, pm10: 52.1 },
+        Iztacalco: { pm25: 25.9, pm10: 47.6 },
+        Iztapalapa: { pm25: 30.5, pm10: 56.8 },
+        "La Magdalena Contreras": { pm25: 16.1, pm10: 31.5 },
+        "Miguel Hidalgo": { pm25: 22.3, pm10: 41.5 },
+        "Milpa Alta": { pm25: 14.3, pm10: 28.7 },
+        Tlalpan: { pm25: 18.2, pm10: 34.5 },
+        Tláhuac: { pm25: 19.8, pm10: 36.9 },
+        "Venustiano Carranza": { pm25: 26.1, pm10: 48.2 },
+        Xochimilco: { pm25: 17.5, pm10: 33.1 },
+        "Álvaro Obregón": { pm25: 22.8, pm10: 42.1 },
+    };
+
+    // --- Color scales ---
+    function getColorPM25(val: number): string {
+        return val > 28
+            ? "#ef4444"
+            : val > 24
+              ? "#f97316"
+              : val > 20
+                ? "#eab308"
+                : val > 16
+                  ? "#22c55e"
+                  : "#06b6d4";
+    }
+
+    function getColorPM10(val: number): string {
+        return val > 50
+            ? "#ef4444"
+            : val > 44
+              ? "#f97316"
+              : val > 38
+                ? "#eab308"
+                : val > 32
+                  ? "#22c55e"
+                  : "#06b6d4";
+    }
+
+    function getLevel(pm25: number): { text: string; color: string } {
+        if (pm25 > 28) return { text: "Muy Alta", color: "#ef4444" };
+        if (pm25 > 24) return { text: "Alta", color: "#f97316" };
+        if (pm25 > 20) return { text: "Media", color: "#eab308" };
+        if (pm25 > 16) return { text: "Moderada", color: "#22c55e" };
+        return { text: "Baja", color: "#06b6d4" };
+    }
+
+    // --- State ---
+    let currentPollutant: "pm25" | "pm10" = "pm25";
+    let geojsonLayer: L.GeoJSON | null = null;
+    let mapInstance: L.Map | null = null;
+
+    // --- Info Panel Update ---
+    function updateInfoPanel(name: string) {
+        const data = pollutionData[name];
+        if (!data) return;
+        const level = getLevel(data.pm25);
+
+        const nameEl = document.getElementById("alcaldia-name");
+        const pm25El = document.getElementById("info-pm25");
+        const pm10El = document.getElementById("info-pm10");
+        const levelEl = document.getElementById("info-level");
+
+        if (nameEl) nameEl.textContent = name;
+        if (pm25El) pm25El.textContent = `${data.pm25} μg/m³`;
+        if (pm10El) pm10El.textContent = `${data.pm10} μg/m³`;
+        if (levelEl) {
+            levelEl.textContent = level.text;
+            levelEl.style.color = level.color;
+        }
+    }
+
+    // --- Style function ---
+    function getStyle(
+        feature: GeoJSON.Feature | undefined,
+    ): L.PathOptions {
+        const name = feature?.properties?.NOMGEO || "";
+        const data = pollutionData[name];
+        const val =
+            currentPollutant === "pm25"
+                ? (data?.pm25 ?? 0)
+                : (data?.pm10 ?? 0);
+        const color =
+            currentPollutant === "pm25"
+                ? getColorPM25(val)
+                : getColorPM10(val);
+
+        return {
+            fillColor: color,
+            weight: 1.5,
+            opacity: 1,
+            color: "rgba(255,255,255,0.25)",
+            fillOpacity: 0.7,
+        };
+    }
+
+    // --- Feature interactions ---
+    function highlightFeature(e: L.LeafletEvent) {
+        const layer = e.target as L.Path;
+        layer.setStyle({
+            weight: 3,
+            color: "#ffffff",
+            fillOpacity: 0.85,
+        });
+        layer.bringToFront();
+
+        const name = (e.target as any).feature?.properties?.NOMGEO;
+        if (name) updateInfoPanel(name);
+    }
+
+    function resetHighlight(e: L.LeafletEvent) {
+        if (geojsonLayer) geojsonLayer.resetStyle(e.target as L.Path);
+    }
+
+    function onEachFeature(feature: GeoJSON.Feature, layer: L.Layer) {
+        const name = feature.properties?.NOMGEO || "";
+        const data = pollutionData[name];
+        if (!data) return;
+
+        const level = getLevel(data.pm25);
+
+        (layer as L.Layer).bindPopup(`
+            <div class="popup-title">${name}</div>
+            <div class="popup-row"><span class="popup-label">PM2.5</span><span class="popup-value">${data.pm25} μg/m³</span></div>
+            <div class="popup-row"><span class="popup-label">PM10</span><span class="popup-value">${data.pm10} μg/m³</span></div>
+            <div class="popup-row" style="margin-top:4px;padding-top:4px;border-top:1px solid rgba(255,255,255,0.1)">
+                <span class="popup-label">Nivel</span>
+                <span class="popup-value" style="color:${level.color}">${level.text}</span>
+            </div>
+        `);
+
+        (layer as L.Path).on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+        });
+    }
+
+    // --- Initialize Map ---
+    function initMap() {
+        const container = document.getElementById("pollution-map");
+        if (!container || mapInstance) return;
+
+        mapInstance = L.map("pollution-map", {
+            center: [19.36, -99.14],
+            zoom: 11,
+            zoomControl: true,
+            scrollWheelZoom: false,
+        });
+
+        // Dark tiles (CartoDB Dark Matter)
+        L.tileLayer(
+            "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+            {
+                attribution:
+                    '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+                subdomains: "abcd",
+                maxZoom: 19,
+            },
+        ).addTo(mapInstance);
+
+        // Load GeoJSON
+        fetch("/data/alcaldias.geojson")
+            .then((r) => r.json())
+            .then((data) => {
+                geojsonLayer = L.geoJSON(data, {
+                    style: getStyle,
+                    onEachFeature: onEachFeature,
+                }).addTo(mapInstance!);
+            });
+    }
+
+    // --- Pollutant Toggle ---
+    function setupToggle() {
+        const btnPM25 = document.getElementById("btn-pm25");
+        const btnPM10 = document.getElementById("btn-pm10");
+
+        btnPM25?.addEventListener("click", () => {
+            currentPollutant = "pm25";
+            btnPM25.className =
+                "pollutant-btn px-5 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-cyan-500/20 text-cyan-400 border border-cyan-500/40";
+            if (btnPM10)
+                btnPM10.className =
+                    "pollutant-btn px-5 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-white/5 text-muted border border-white/10 hover:border-white/20";
+            if (geojsonLayer) geojsonLayer.setStyle(getStyle as any);
+        });
+
+        btnPM10?.addEventListener("click", () => {
+            currentPollutant = "pm10";
+            if (btnPM25)
+                btnPM25.className =
+                    "pollutant-btn px-5 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-white/5 text-muted border border-white/10 hover:border-white/20";
+            btnPM10!.className =
+                "pollutant-btn px-5 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-cyan-500/20 text-cyan-400 border border-cyan-500/40";
+            if (geojsonLayer) geojsonLayer.setStyle(getStyle as any);
+        });
+    }
+
+    // --- Init ---
+    initMap();
+    setupToggle();
+
+    // --- GSAP Animations ---
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#map-section",
+            start: "top 60%",
+            end: "bottom 40%",
+            toggleActions: "play none none reverse",
+        },
+    });
+
+    tl.to(".map-header", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    tl.to(
+        ".map-controls",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power3.out",
+        },
+        "-=0.4",
+    );
+
+    tl.to(
+        ".map-container-wrapper",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+        },
+        "-=0.3",
+    );
+
+    // Decorative glow animations
+    const decorTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#map-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
+        },
+    });
+
+    decorTl.fromTo(
+        ".map-glow-1",
+        { opacity: 0, x: "-15%" },
+        { opacity: 1, x: "5%", ease: "none" },
+    );
+
+    decorTl.fromTo(
+        ".map-glow-2",
+        { opacity: 0, x: "15%" },
+        { opacity: 1, x: "-5%", ease: "none" },
+        0,
+    );
+</script>
