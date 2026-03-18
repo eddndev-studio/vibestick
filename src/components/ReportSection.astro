@@ -1,0 +1,541 @@
+---
+
+---
+
+<section id="report-section" class="relative w-full py-32 pointer-events-auto overflow-hidden">
+    <!-- Decorative Background Elements -->
+    <div
+        class="report-glow-1 absolute top-[15%] left-[-10%] w-[35vw] h-[35vw] rounded-full bg-emerald-500/5 blur-[100px] pointer-events-none opacity-0"
+    ></div>
+    <div
+        class="report-glow-2 absolute bottom-[10%] right-[-10%] w-[30vw] h-[30vw] rounded-full bg-teal-500/5 blur-[100px] pointer-events-none opacity-0"
+    ></div>
+
+    <!-- Gradient Accent Lines -->
+    <div
+        class="report-line absolute top-[12%] right-0 w-[25%] h-[1px] bg-gradient-to-l from-transparent via-emerald-500/20 to-transparent pointer-events-none opacity-0"
+    ></div>
+    <div
+        class="report-line absolute bottom-[20%] left-0 w-[20%] h-[1px] bg-gradient-to-r from-transparent via-teal-500/20 to-transparent pointer-events-none opacity-0"
+    ></div>
+
+    <div class="container mx-auto px-6 md:px-12 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-16 report-header opacity-0 translate-y-10">
+            <div class="w-16 h-[2px] bg-emerald-500 mx-auto mb-6"></div>
+            <h2
+                class="text-4xl md:text-5xl font-black uppercase tracking-wide text-white mb-4"
+            >
+                Validación<br />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500"
+                >
+                    Funcional
+                </span>
+            </h2>
+            <p class="text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+                Resultados del experimento de ambiente controlado para determinar
+                la capacidad de los stickers con TiO₂ para inhibir microorganismos
+                y degradar materia orgánica.
+            </p>
+        </div>
+
+        <!-- Methodology -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- Control Group Card -->
+            <div
+                class="report-card opacity-0 translate-y-10 p-8 rounded-xl bg-white/5 border border-white/10 space-y-5"
+            >
+                <div class="flex items-center gap-3">
+                    <span
+                        class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center"
+                    >
+                        <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19 14.5M14.25 3.104c.251.023.501.05.75.082M19 14.5l-1.47 4.41a1.5 1.5 0 01-1.423 1.04H7.893a1.5 1.5 0 01-1.423-1.04L5 14.5m14 0H5" />
+                        </svg>
+                    </span>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white uppercase tracking-wide">
+                            Grupo A
+                        </h3>
+                        <p class="text-red-400 font-semibold text-sm uppercase tracking-wider">
+                            Control
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-muted leading-relaxed">
+                    Dos frascos con mezcla de agua y café expuestos al ambiente
+                    sin protección alguna durante una semana.
+                </p>
+
+                <div class="space-y-3">
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider">
+                        Resultado tras 7 días
+                    </h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0"></span>
+                            <span class="text-muted text-sm leading-relaxed">
+                                Formación visible de colonias fúngicas (hongos)
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0"></span>
+                            <span class="text-muted text-sm leading-relaxed">
+                                Turbidez pronunciada en el líquido
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-2 shrink-0"></span>
+                            <span class="text-muted text-sm leading-relaxed">
+                                Alta densidad de materia orgánica y subproductos fúngicos
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-4 rounded-lg bg-red-500/10 border border-red-500/20">
+                    <p class="text-red-300 text-sm font-medium">
+                        Absorbancia promedio:
+                        <span class="text-white font-bold">6.59</span>
+                        — alta carga orgánica residual
+                    </p>
+                </div>
+            </div>
+
+            <!-- Experimental Group Card -->
+            <div
+                class="report-card opacity-0 translate-y-10 p-8 rounded-xl bg-white/5 border border-white/10 space-y-5"
+            >
+                <div class="flex items-center gap-3">
+                    <span
+                        class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center"
+                    >
+                        <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </span>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white uppercase tracking-wide">
+                            Grupo B
+                        </h3>
+                        <p class="text-emerald-400 font-semibold text-sm uppercase tracking-wider">
+                            Con Eheco-Stick
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-muted leading-relaxed">
+                    Dos frascos equipados con los stickers nanotecnológicos activos
+                    de TiO₂ durante el mismo periodo de una semana.
+                </p>
+
+                <div class="space-y-3">
+                    <h4 class="text-white font-bold text-sm uppercase tracking-wider">
+                        Resultado tras 7 días
+                    </h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0"></span>
+                            <span class="text-muted text-sm leading-relaxed">
+                                Transparencia del líquido mantenida
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0"></span>
+                            <span class="text-muted text-sm leading-relaxed">
+                                Ausencia total de formación de hongos
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0"></span>
+                            <span class="text-muted text-sm leading-relaxed">
+                                Reducción significativa de la carga orgánica
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                    <p class="text-emerald-300 text-sm font-medium">
+                        Absorbancia promedio:
+                        <span class="text-white font-bold">5.94</span>
+                        — reducción significativa validada
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- UV-Vis Chart -->
+        <div class="report-chart opacity-0 translate-y-10 mb-16">
+            <div class="p-6 md:p-8 rounded-xl bg-white/5 border border-white/10">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white uppercase tracking-wide">
+                            Espectroscopía UV-Vis
+                        </h3>
+                        <p class="text-muted text-sm mt-1">
+                            Absorbancia vs. Longitud de onda (nm) — Análisis comparativo
+                        </p>
+                    </div>
+                    <!-- Chart Legend -->
+                    <div class="flex flex-wrap gap-4 text-xs">
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox" checked data-series="A1" class="sr-only peer" />
+                            <span class="w-3 h-3 rounded-sm bg-red-400 peer-checked:opacity-100 opacity-30 transition-opacity"></span>
+                            <span class="text-muted peer-checked:text-white transition-colors">A1 (Control)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox" checked data-series="A2" class="sr-only peer" />
+                            <span class="w-3 h-3 rounded-sm bg-orange-400 peer-checked:opacity-100 opacity-30 transition-opacity"></span>
+                            <span class="text-muted peer-checked:text-white transition-colors">A2 (Control)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox" checked data-series="B1" class="sr-only peer" />
+                            <span class="w-3 h-3 rounded-sm bg-emerald-400 peer-checked:opacity-100 opacity-30 transition-opacity"></span>
+                            <span class="text-muted peer-checked:text-white transition-colors">B1 (Eheco-Stick)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox" checked data-series="B2" class="sr-only peer" />
+                            <span class="w-3 h-3 rounded-sm bg-teal-400 peer-checked:opacity-100 opacity-30 transition-opacity"></span>
+                            <span class="text-muted peer-checked:text-white transition-colors">B2 (Eheco-Stick)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Canvas Chart -->
+                <div class="relative w-full aspect-[2/1] md:aspect-[3/1]">
+                    <canvas id="uvvis-chart" class="w-full h-full"></canvas>
+                    <!-- Tooltip -->
+                    <div id="chart-tooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-150 bg-void/90 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-2 text-xs z-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Findings -->
+        <div class="report-conclusion opacity-0 translate-y-10">
+            <div
+                class="p-8 rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20"
+            >
+                <h3 class="text-sm uppercase tracking-wider text-emerald-400 mb-4">
+                    Conclusión del Análisis
+                </h3>
+                <p class="text-white/90 leading-relaxed mb-6">
+                    La reducción de la absorbancia en las muestras B demuestra que la reacción
+                    fotocatalítica del TiO₂ no solo impidió el crecimiento de hongos, sino que
+                    degradó las moléculas orgánicas suspendidas, resultando en un líquido con
+                    menor densidad óptica.
+                </p>
+
+                <!-- Stats Row -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <h4 class="text-3xl md:text-4xl font-black text-white mb-1">
+                            100%
+                        </h4>
+                        <p class="text-xs text-muted uppercase tracking-widest">
+                            Inhibición fúngica
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-3xl md:text-4xl font-black text-white mb-1">
+                            ~10%
+                        </h4>
+                        <p class="text-xs text-muted uppercase tracking-widest">
+                            Menos carga orgánica
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-3xl md:text-4xl font-black text-white mb-1">
+                            7
+                        </h4>
+                        <p class="text-xs text-muted uppercase tracking-widest">
+                            Días de prueba
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-3xl md:text-4xl font-black text-white mb-1">
+                            UV-Vis
+                        </h4>
+                        <p class="text-xs text-muted uppercase tracking-widest">
+                            Validado por espectroscopía
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // === GSAP Animations ===
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#report-section",
+            start: "top 60%",
+            end: "bottom 40%",
+            toggleActions: "play none none reverse",
+        },
+    });
+
+    tl.to(".report-header", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+    });
+
+    tl.to(
+        ".report-card",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out",
+        },
+        "-=0.4",
+    );
+
+    tl.to(
+        ".report-chart",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+        },
+        "-=0.4",
+    );
+
+    tl.to(
+        ".report-conclusion",
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+        },
+        "-=0.4",
+    );
+
+    // Decorative glow animations
+    const decorTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#report-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
+        },
+    });
+
+    decorTl.fromTo(
+        ".report-glow-1",
+        { opacity: 0, x: "-20%" },
+        { opacity: 1, x: "10%", ease: "none" },
+    );
+
+    decorTl.fromTo(
+        ".report-glow-2",
+        { opacity: 0, x: "20%" },
+        { opacity: 1, x: "-10%", ease: "none" },
+        0,
+    );
+
+    decorTl.fromTo(
+        ".report-line",
+        { opacity: 0, scaleX: 0 },
+        { opacity: 1, scaleX: 1, ease: "power1.out", stagger: 0.2 },
+        0.1,
+    );
+
+    // === UV-Vis Chart ===
+    const chartData = {"wavelengths":[200.0,209.8,219.7,229.5,239.3,249.2,259.0,268.8,278.7,288.5,298.3,308.2,318.0,327.8,337.6,347.5,357.3,367.1,377.0,386.8,396.6,406.5,416.3,426.1,436.0,445.8,455.6,465.5,475.3,485.1,495.0,504.8,514.6,524.5,534.3,544.1,554.0,563.8,573.6,583.4,593.3,603.1,612.9,622.8,632.6,642.4,652.3,662.1,671.9,681.8,691.6,701.4,711.3,721.1,730.9,740.8,750.6,760.4,770.3,780.1,789.9,799.8,809.6,819.4,829.2,839.1,848.9],"B1":[-1.328,-0.976,-0.77,-0.685,13.165,17.572,19.381,21.438,16.543,17.49,22.419,23.859,24.701,24.85,24.057,24.83,21.161,16.216,12.598,10.397,8.81,7.629,6.707,5.915,5.312,4.768,4.329,3.896,3.549,3.208,2.89,2.649,2.414,2.195,1.99,1.829,1.692,1.554,1.431,1.31,1.212,1.119,1.028,0.954,0.894,0.834,0.786,0.72,0.688,0.644,0.609,0.562,0.53,0.497,0.483,0.456,0.441,0.418,0.38,0.372,0.363,0.35,0.31,0.316,0.309,0.291,0.264],"B2":[-1.328,-0.976,-0.77,-0.552,13.85,17.84,19.939,21.971,16.615,17.216,22.15,23.742,24.55,24.749,24.191,25.171,20.416,15.611,12.262,10.06,8.499,7.337,6.414,5.653,5.051,4.516,4.081,3.659,3.312,2.979,2.673,2.436,2.202,1.999,1.803,1.639,1.499,1.371,1.256,1.149,1.053,0.963,0.874,0.808,0.759,0.697,0.653,0.584,0.554,0.516,0.496,0.458,0.421,0.396,0.363,0.365,0.346,0.319,0.278,0.286,0.279,0.28,0.258,0.254,0.213,0.204,0.226],"A1":[-1.297,-0.944,-0.738,-0.72,10.394,14.395,16.503,18.659,13.497,14.277,19.197,21.044,22.107,22.127,21.401,22.566,25.561,22.853,18.104,15.101,13.107,11.624,10.386,9.309,8.479,7.742,7.137,6.52,5.963,5.402,4.855,4.402,3.978,3.628,3.294,3.018,2.781,2.551,2.362,2.176,2.01,1.847,1.704,1.595,1.481,1.373,1.264,1.138,1.058,0.961,0.895,0.809,0.76,0.711,0.653,0.624,0.572,0.538,0.5,0.473,0.436,0.415,0.389,0.38,0.354,0.317,0.291],"A2":[-1.3,-0.945,-0.818,-0.147,14.524,17.534,19.333,21.611,16.643,17.38,22.028,23.304,24.156,24.143,23.226,24.117,24.789,18.946,15.102,12.65,11.034,9.768,8.706,7.823,7.102,6.476,5.971,5.447,4.983,4.526,4.07,3.692,3.348,3.045,2.773,2.538,2.358,2.156,1.995,1.841,1.713,1.577,1.458,1.358,1.263,1.177,1.09,0.97,0.903,0.833,0.77,0.697,0.656,0.617,0.548,0.54,0.497,0.46,0.427,0.415,0.392,0.37,0.333,0.317,0.302,0.277,0.273]};
+
+    const seriesConfig: Record<string, { color: string; label: string }> = {
+        A1: { color: "#f87171", label: "A1 (Control)" },
+        A2: { color: "#fb923c", label: "A2 (Control)" },
+        B1: { color: "#34d399", label: "B1 (Eheco-Stick)" },
+        B2: { color: "#2dd4bf", label: "B2 (Eheco-Stick)" },
+    };
+
+    const canvas = document.getElementById("uvvis-chart") as HTMLCanvasElement;
+    const tooltip = document.getElementById("chart-tooltip") as HTMLElement;
+    const ctx = canvas.getContext("2d")!;
+
+    const visibleSeries: Record<string, boolean> = { A1: true, A2: true, B1: true, B2: true };
+
+    // Toggle checkboxes
+    document.querySelectorAll<HTMLInputElement>("[data-series]").forEach((cb) => {
+        cb.addEventListener("change", () => {
+            visibleSeries[cb.dataset.series!] = cb.checked;
+            drawChart();
+        });
+    });
+
+    function drawChart() {
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+
+        const w = rect.width;
+        const h = rect.height;
+
+        // Padding
+        const pad = { top: 20, right: 20, bottom: 40, left: 55 };
+        const plotW = w - pad.left - pad.right;
+        const plotH = h - pad.top - pad.bottom;
+
+        // Clear
+        ctx.clearRect(0, 0, w, h);
+
+        // Data range
+        const wls = chartData.wavelengths;
+        const xMin = wls[0];
+        const xMax = wls[wls.length - 1];
+
+        let yMin = -2;
+        let yMax = 27;
+
+        const toX = (wl: number) => pad.left + ((wl - xMin) / (xMax - xMin)) * plotW;
+        const toY = (val: number) => pad.top + plotH - ((val - yMin) / (yMax - yMin)) * plotH;
+
+        // Grid lines
+        ctx.strokeStyle = "rgba(255,255,255,0.06)";
+        ctx.lineWidth = 1;
+
+        // Y grid
+        const yTicks = [-2, 0, 5, 10, 15, 20, 25];
+        for (const tick of yTicks) {
+            const y = toY(tick);
+            ctx.beginPath();
+            ctx.moveTo(pad.left, y);
+            ctx.lineTo(w - pad.right, y);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgba(148,163,184,0.6)";
+            ctx.font = "11px Outfit, sans-serif";
+            ctx.textAlign = "right";
+            ctx.textBaseline = "middle";
+            ctx.fillText(tick.toString(), pad.left - 8, y);
+        }
+
+        // X grid
+        const xTicks = [200, 300, 400, 500, 600, 700, 800];
+        for (const tick of xTicks) {
+            const x = toX(tick);
+            ctx.beginPath();
+            ctx.moveTo(x, pad.top);
+            ctx.lineTo(x, pad.top + plotH);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgba(148,163,184,0.6)";
+            ctx.font = "11px Outfit, sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "top";
+            ctx.fillText(`${tick}`, x, pad.top + plotH + 8);
+        }
+
+        // Axis labels
+        ctx.fillStyle = "rgba(148,163,184,0.5)";
+        ctx.font = "11px Outfit, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Longitud de onda (nm)", pad.left + plotW / 2, h - 4);
+
+        ctx.save();
+        ctx.translate(12, pad.top + plotH / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillText("Absorbancia", 0, 0);
+        ctx.restore();
+
+        // Draw series
+        const seriesOrder: (keyof typeof seriesConfig)[] = ["A1", "A2", "B1", "B2"];
+        for (const key of seriesOrder) {
+            if (!visibleSeries[key]) continue;
+            const values = chartData[key as keyof typeof chartData] as number[];
+            const { color } = seriesConfig[key];
+
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.5;
+            ctx.lineJoin = "round";
+            ctx.beginPath();
+
+            for (let i = 0; i < wls.length; i++) {
+                const x = toX(wls[i]);
+                const y = toY(values[i]);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+
+        return { toX, toY, pad, plotW, plotH, xMin, xMax, yMin, yMax, w, h };
+    }
+
+    let chartLayout = drawChart();
+
+    // Tooltip on hover
+    canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const { pad, plotW, xMin, xMax } = chartLayout;
+
+        // Find nearest wavelength
+        const wlAtMouse = xMin + ((mx - pad.left) / plotW) * (xMax - xMin);
+        const wls = chartData.wavelengths;
+        let closest = 0;
+        let minDist = Infinity;
+        for (let i = 0; i < wls.length; i++) {
+            const d = Math.abs(wls[i] - wlAtMouse);
+            if (d < minDist) { minDist = d; closest = i; }
+        }
+
+        if (mx < pad.left || mx > pad.left + plotW) {
+            tooltip.style.opacity = "0";
+            return;
+        }
+
+        let html = `<div class="text-white font-bold mb-1">${wls[closest].toFixed(0)} nm</div>`;
+        const seriesOrder: string[] = ["A1", "A2", "B1", "B2"];
+        for (const key of seriesOrder) {
+            if (!visibleSeries[key]) continue;
+            const val = (chartData[key as keyof typeof chartData] as number[])[closest];
+            const { color, label } = seriesConfig[key];
+            html += `<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-sm inline-block" style="background:${color}"></span><span class="text-muted">${label}:</span> <span class="text-white">${val.toFixed(3)}</span></div>`;
+        }
+
+        tooltip.innerHTML = html;
+        tooltip.style.opacity = "1";
+
+        // Position tooltip
+        let tx = mx + 12;
+        let ty = my - 10;
+        const tw = tooltip.offsetWidth;
+        const th = tooltip.offsetHeight;
+        if (tx + tw > rect.width - 8) tx = mx - tw - 12;
+        if (ty + th > rect.height - 8) ty = rect.height - th - 8;
+        if (ty < 8) ty = 8;
+
+        tooltip.style.left = `${tx}px`;
+        tooltip.style.top = `${ty}px`;
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+        tooltip.style.opacity = "0";
+    });
+
+    // Resize handler
+    window.addEventListener("resize", () => {
+        chartLayout = drawChart();
+    });
+</script>
