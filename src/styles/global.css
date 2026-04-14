@@ -5,24 +5,11 @@
   This allows them to switch based on the .dark selector 
 */
 :root {
-  /* Light Mode (Default) */
-  --void-val: #FFFFFF;
-  /* Pure White */
-  --surface-val: #F8FAFC;
-  /* Slate 50 */
-
-  --primary-val: #7E22CE;
-  /* Darker Purple */
-  --primary-dark-val: #581c87;
-
-  --secondary-val: #4F46E5;
-  /* Darker Indigo */
-  --secondary-dark-val: #3730a3;
-
-  --body-val: #0F172A;
-  /* Slate 900 */
-  --muted-val: #64748B;
-  /* Slate 500 */
+--color-bg: #0b1220; 
+--color-text: #e6f1ff;
+--color-muted: #9fb3c8;
+--color-border: rgba(59, 130, 246, 0.25);
+--vibe-gradient: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
 }
 
 :root.dark {
