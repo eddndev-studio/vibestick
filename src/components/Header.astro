@@ -21,10 +21,11 @@ const { pathname } = Astro.url;
     <nav
         class="max-w-[1600px] mx-auto flex items-center justify-between px-4 py-4 md:px-8"
     >
-        <!-- Logo -->
-        <a href="/" class="hover:opacity-80 transition-opacity">
-            <img src="/assets/logo.png" alt={title} class="h-12" />
-        </a>
+            <!-- Logos agrupados -->
+    <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <img src="/assets/logo.png" alt={title} class="h-10 md:h-12" />
+        <img src="/assets/logo2.png" alt={title} class="h-6 md:h-8 opacity-80" />
+    </a>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex gap-8 items-center">

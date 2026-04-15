@@ -1,41 +1,38 @@
 @import "tailwindcss";
 
-/* 
-  Define the base values as CSS variables in :root
-  This allows them to switch based on the .dark selector 
-*/
 :root {
---color-bg: #0b1220; 
---color-text: #e6f1ff;
---color-muted: #9fb3c8;
---color-border: rgba(59, 130, 246, 0.25);
---vibe-gradient: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  /* Light Mode (Default) */
+  --void-val: #ffffff;
+  --surface-val: #f1f5f9;
+
+  /* CAMBIO PRINCIPAL: azul/cyan */
+  --primary-val: #0ea5e9;        /* sky blue moderno */
+  --primary-dark-val: #0369a1;   /* azul profundo */
+
+  --secondary-val: #06b6d4;      /* cyan */
+  --secondary-dark-val: #0891b2;
+
+  --body-val: #0f172a;
+  --muted-val: #64748b;
 }
 
 :root.dark {
-  /* Scientific Premium Dark Mode */
-  --void-val: #04060F;
-  /* Deepest Navy/Black */
-  --surface-val: #0F1221;
-  /* Card background */
+  /* Dark modern */
+  --void-val: #020617;          /* fondo oscuro */
+  --surface-val: #0b1220;       /* cards */
 
-  --primary-val: #A858F7;
-  /* Vibrant Purple */
-  --primary-dark-val: #7E22CE;
+  /* swaping to blue insano xd */
+  --primary-val: #00e5ff;       /* CYAN NEON */
+  --primary-dark-val: #009dff;
 
-  --secondary-val: #6366F1;
-  /* Indigo/Blue */
-  --secondary-dark-val: #4F46E5;
+  --secondary-val: #38bdf8;     /* azul claro */
+  --secondary-dark-val: #2563eb;
 
-  --body-val: #F1F5F9;
-  /* Off-white */
-  --muted-val: #94A3B8;
-  /* Slate gray */
+  --body-val: #e2e8f0;
+  --muted-val: #94a3b8;
 }
 
 @theme {
-  /* Map Tailwind/Theme tokens to the dynamic CSS variables */
-
   --color-void: var(--void-val);
   --color-surface: var(--surface-val);
 
@@ -48,13 +45,10 @@
   --color-body: var(--body-val);
   --color-muted: var(--muted-val);
 
-  /* Fonts */
   --font-sans: 'Inter', 'Roboto', ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Base Styles */
 @layer base {
-
   html,
   body {
     @apply bg-void text-body font-sans antialiased;
