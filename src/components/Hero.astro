@@ -6,14 +6,21 @@
     id="hero"
     class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden"
 >
-  
 
-    <!-- 3D Scene Container (Desktop Only) -->
-    <div
-        id="canvas-container"
-        class="fixed inset-0 z-0 w-full h-full pointer-events-none hidden md:block"
-    >
+    <!--Sticker PNG (reemplaza el 3D) -->
+    <div id="sticker-container" class="fixed inset-0 pointer-events-none z-0">
+         <img 
+            id="sticker"
+            src="/assets/images/VibeSticker_LogoSL.png"
+            alt="sticker"
+            class="absolute top-1/2 left-1/2 
+                w-[65vw] max-w-[600px]
+                -translate-x-1/2 -translate-y-1/2
+                drop-shadow-[0_0_80px_rgba(34,211,238,0.45)]
+                mix-blend-lighten"
+        />
     </div>
+
 
     <!-- Hero Content -->
     <div
@@ -24,7 +31,7 @@
             class="mb-6 px-4 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
         >
             <span
-                class="text-sm font-medium tracking-tightst text-white/80 uppercase"
+                class="text-sm font-medium tracking-tight text-white/80 uppercase"
             >
                 Stickers de Alta Tecnología
             </span>
@@ -37,8 +44,10 @@
             <span
                 class="bg-clip-text text-transparent bg-gradient-to-br from-white via-slate-100 to-slate-400 block leading-tight"
             >
-                Pega,<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
-                > respira y disfruta</span>
+                Pega,
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                    respira y disfruta
+                </span>
             </span>
         </h1>
 
@@ -51,66 +60,20 @@
                 Ver Colección
             </span>
         </a>
-
-        <!-- Mobile Sticker (Below CTA, inside hero flow) -->
-        <div class="md:hidden mt-12 mobile-sticker-wrap">
-            <img
-                src="/assets/images/tech-illustration.png"
-                alt="Eheco-Stick"
-                class="mobile-sticker w-[55vw] max-w-[280px] object-contain opacity-0"
-            />
-        </div>
     </div>
 </section>
 
 <script>
     import gsap from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { initSticker } from "../scripts/sticker";
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const isMobile = window.innerWidth < 768;
+    //STICKER ANIMATION (PNG)
+    initSticker();
 
-    if (!isMobile) {
-        // Desktop: Load full 3D scene
-        import("../scripts/sticker-scene").then(({ initStickerScene }) => {
-            initStickerScene("canvas-container");
-        });
-    } else {
-        // Mobile: Fade in the PNG sticker
-        gsap.to(".mobile-sticker", {
-            opacity: 0.9,
-            scale: 1,
-            duration: 1.5,
-            delay: 1.2,
-            ease: "power3.out",
-        });
-
-        // Subtle floating animation
-        gsap.to(".mobile-sticker", {
-            y: -8,
-            duration: 3,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            delay: 2.5,
-        });
-
-        // Fade out PNG on scroll (leaves with the hero)
-        gsap.to(".mobile-sticker-wrap", {
-            opacity: 0,
-            y: -30,
-            ease: "power2.in",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "70% top",
-                end: "bottom top",
-                scrub: 1,
-            },
-        });
-    }
-
-    // Hero Content Animation (both desktop & mobile)
+    //HERO TEXT ANIMATION
     const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
     });
@@ -122,7 +85,7 @@
             opacity: 0,
             duration: 1,
         },
-        1.2,
+        0.5,
     );
 
     tl.from(
@@ -133,7 +96,7 @@
             duration: 1.5,
             stagger: 0.1,
         },
-        1.5,
+        0.8,
     );
 
     tl.from(
@@ -146,10 +109,3 @@
         "-=0.8",
     );
 </script>
-
-<style>
-    .mobile-sticker {
-        transform: scale(0.9);
-        filter: drop-shadow(0 0 30px rgba(74, 222, 128, 0.15));
-    }
-</style>

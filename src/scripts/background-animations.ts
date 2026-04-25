@@ -6,11 +6,87 @@ gsap.registerPlugin(ScrollTrigger);
 export const initBackgroundAnimations = () => {
     const isMobile = window.innerWidth < 768;
 
-    // Skip ALL heavy scroll-driven animations on mobile
+    // Skip heavy animations on mobile devices for performance
     if (isMobile) return;
 
-    // --- Info Section Background Transition ---
-    // Fade out glow and move hexagons to center
+    /**
+     * -------------------------------------------------------
+     * STARFIELD BACKGROUND (lightweight, DOM-based)
+     * -------------------------------------------------------
+     * Creates a fixed background layer with animated stars
+     * to simulate a subtle "space" environment.
+     */
+
+    // Prevent duplicate initialization
+    if (document.getElementById("stars-bg")) return;
+
+    const starsContainer = document.createElement("div");
+    starsContainer.id = "stars-bg";
+    document.body.appendChild(starsContainer);
+
+    gsap.set(starsContainer, {
+        position: "fixed",
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+    });
+
+    const STAR_COUNT = 70;
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+        const star = document.createElement("div");
+
+        gsap.set(star, {
+            position: "absolute",
+            width: Math.random() * 2 + 1,
+            height: Math.random() * 2 + 1,
+            background: "white",
+            borderRadius: "50%",
+            opacity: Math.random(),
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+        });
+
+        starsContainer.appendChild(star);
+
+        // Vertical floating motion (subtle parallax feel)
+        gsap.to(star, {
+            y: "+=" + (Math.random() * 40 + 10),
+            duration: Math.random() * 6 + 4,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+
+        // Opacity flicker (twinkling effect)
+        gsap.to(star, {
+            opacity: Math.random(),
+            duration: Math.random() * 2 + 1,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+    }
+
+    /**
+     * Subtle vertical shift on scroll to simulate depth
+     */
+    gsap.to(starsContainer, {
+        y: -150,
+        scrollTrigger: {
+            trigger: "#tech-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2,
+        },
+    });
+
+    /**
+     * -------------------------------------------------------
+     * INFO SECTION
+     * -------------------------------------------------------
+     * Fade out glow and center hexagons
+     */
     const bgTl = gsap.timeline({
         scrollTrigger: {
             trigger: "#info-section",
@@ -20,71 +96,51 @@ export const initBackgroundAnimations = () => {
         },
     });
 
-    // Fade out the main glow
-    bgTl.to(
-        "#glow-1",
-        {
-            opacity: 0,
-            duration: 1,
-            ease: "power1.out",
-            immediateRender: false,
-        },
-        0,
-    );
+    bgTl.to("#glow-1", {
+        opacity: 0,
+        ease: "power1.out",
+        immediateRender: false,
+    }, 0);
 
-    // Solid Hexagons (1 & 3) -> Fade Out
-    bgTl.to(
-        [".hex-1", ".hex-3"],
-        {
-            opacity: 0,
-            scale: 0.5,
-            duration: 1,
-            ease: "power1.out",
-            immediateRender: false,
-        },
-        0,
-    );
+    bgTl.to([".hex-1", ".hex-3"], {
+        opacity: 0,
+        scale: 0.5,
+        ease: "power1.out",
+        immediateRender: false,
+    }, 0);
 
-    // Outline Hexagons (2 & 4) -> Center perfectly
-    // Hex 2 (Large Outline)
-    bgTl.to(
-        ".hex-2",
-        {
-            top: "50%",
-            right: "50%",
-            xPercent: 50,
-            yPercent: -50,
-            x: 0,
-            y: 0,
-            rotation: 0,
-            scale: 1,
-            ease: "power2.inOut",
-            immediateRender: false,
-        },
-        0,
-    );
+    bgTl.to(".hex-2", {
+        top: "50%",
+        right: "50%",
+        xPercent: 50,
+        yPercent: -50,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        ease: "power2.inOut",
+        immediateRender: false,
+    }, 0);
 
-    // Hex 4 (Small Outline)
-    bgTl.to(
-        ".hex-4",
-        {
-            top: "50%",
-            right: "50%",
-            xPercent: 50,
-            yPercent: -50,
-            x: 0,
-            y: 0,
-            rotation: 0,
-            scale: 1,
-            ease: "power2.inOut",
-            immediateRender: false,
-        },
-        0,
-    );
+    bgTl.to(".hex-4", {
+        top: "50%",
+        right: "50%",
+        xPercent: 50,
+        yPercent: -50,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        ease: "power2.inOut",
+        immediateRender: false,
+    }, 0);
 
-
-    // --- Lab Section Background Animation ---
-    // Animate WRAPPERS (not SVGs directly) to avoid conflicts with bgTl
+    /**
+     * -------------------------------------------------------
+     * LAB SECTION
+     * -------------------------------------------------------
+     * Spread hexagons horizontally and scale them
+     */
     const labBgTl = gsap.timeline({
         scrollTrigger: {
             trigger: "#lab-section",
@@ -95,33 +151,26 @@ export const initBackgroundAnimations = () => {
         },
     });
 
-    // Hex 2 Wrapper -> Move LEFT, scale DOWN to ~30vw
-    labBgTl.to(
-        ".hex-2-wrap",
-        {
-            x: "-13vw",
-            rotation: 360,
-            scale: 0.5,
-            ease: "power2.inOut",
-        },
-        0,
-    );
+    labBgTl.to(".hex-2-wrap", {
+        x: "-13vw",
+        rotation: 360,
+        scale: 0.5,
+        ease: "power2.inOut",
+    }, 0);
 
-    // Hex 4 Wrapper -> Move RIGHT, scale UP to ~30vw
-    labBgTl.to(
-        ".hex-4-wrap",
-        {
-            x: "13vw",
-            rotation: 360,
-            scale: 2,
-            ease: "power2.inOut",
-        },
-        0,
-    );
+    labBgTl.to(".hex-4-wrap", {
+        x: "13vw",
+        rotation: 360,
+        scale: 2,
+        ease: "power2.inOut",
+    }, 0);
 
-
-    // --- Tech Section Background Animation ---
-    // Move hexagons to LEFT side, concentric and rotating
+    /**
+     * -------------------------------------------------------
+     * TECH SECTION
+     * -------------------------------------------------------
+     * Move hexagons to the left side and create concentric motion
+     */
     const techBgTl = gsap.timeline({
         scrollTrigger: {
             trigger: "#tech-section",
@@ -132,38 +181,26 @@ export const initBackgroundAnimations = () => {
         },
     });
 
-    // Hex 2 Wrapper -> Move to LEFT, align with container edge
-    // Container max-width: 1280px (xl), left edge at: calc(50vw - 640px)
-    // Position from center: calc(-50vw + 640px) - hex_radius
-    // Hex-2 at scale 0.4 → 24vw effective → ~10.4vw radius
-    techBgTl.to(
-        ".hex-2-wrap",
-        {
-            x: "calc(-50vw + 640px - 10vw)", // Align right edge with container left edge
-            y: 0,
-            rotation: 720,
-            scale: 0.8,
-            ease: "power2.inOut",
-        },
-        0,
-    );
+    techBgTl.to(".hex-2-wrap", {
+        x: "calc(-50vw + 640px - 10vw)",
+        rotation: 720,
+        scale: 0.8,
+        ease: "power2.inOut",
+    }, 0);
 
-    // Hex 4 Wrapper -> Same position, nested inside
-    techBgTl.to(
-        ".hex-4-wrap",
-        {
-            x: "calc(-50vw + 640px - 10vw)",
-            y: 0,
-            rotation: -720,
-            scale: 0.6,
-            ease: "power2.inOut",
-        },
-        0,
-    );
+    techBgTl.to(".hex-4-wrap", {
+        x: "calc(-50vw + 640px - 10vw)",
+        rotation: -720,
+        scale: 0.6,
+        ease: "power2.inOut",
+    }, 0);
 
-
-    // --- Mission Section Background Animation ---
-    // Hexagons spread to opposite corners, framing the content diagonally
+    /**
+     * -------------------------------------------------------
+     * MISSION SECTION
+     * -------------------------------------------------------
+     * Move hexagons diagonally to opposite corners
+     */
     const missionBgTl = gsap.timeline({
         scrollTrigger: {
             trigger: "#mission-section",
@@ -174,29 +211,24 @@ export const initBackgroundAnimations = () => {
         },
     });
 
-    // Hex 2 -> Top right corner
-    missionBgTl.to(
-        ".hex-2-wrap",
-        {
-            x: "35vw",
-            y: "-30vh",
-            rotation: 1080,
-            scale: 0.6,
-            ease: "power2.inOut",
-        },
-        0,
-    );
+    missionBgTl.to(".hex-2-wrap", {
+        x: "35vw",
+        y: "-30vh",
+        rotation: 1080,
+        scale: 0.6,
+        ease: "power2.inOut",
+    }, 0);
 
-    // Hex 4 -> Bottom left corner
-    missionBgTl.to(
-        ".hex-4-wrap",
-        {
-            x: "-35vw",
-            y: "30vh",
-            rotation: -1080,
-            scale: 0.4,
-            ease: "power2.inOut",
-        },
-        0,
-    );
+    missionBgTl.to(".hex-4-wrap", {
+        x: "-35vw",
+        y: "30vh",
+        rotation: -1080,
+        scale: 0.4,
+        ease: "power2.inOut",
+    }, 0);
+
+    /**
+     * Refresh ScrollTrigger after setup
+     */
+    ScrollTrigger.refresh();
 };
