@@ -16,7 +16,7 @@ const { pathname } = Astro.url;
 
 <header
     id="main-header"
-    class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-void/80 backdrop-blur-xl opacity-0"
+   class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-void/80 backdrop-blur-xl" 
 >
     <nav
         class="max-w-[1600px] mx-auto flex items-center justify-between px-4 py-4 md:px-8"
@@ -86,8 +86,7 @@ const { pathname } = Astro.url;
             id="mobile-menu-btn"
             class="md:hidden flex flex-col gap-1.5 p-2 group"
             aria-label="Abrir menú"
-        >
-            <span
+        >            <span
                 class="hamburger-line w-6 h-[2px] bg-white transition-all duration-300 origin-center"
             ></span>
             <span
@@ -164,6 +163,29 @@ const { pathname } = Astro.url;
     const menu = document.getElementById("mobile-menu");
     const lines = btn?.querySelectorAll(".hamburger-line");
     let isOpen = false;
+
+    let lastScroll = 0;
+    const header = document.getElementById("main-header");
+
+    window.addEventListener("scroll", () => {
+        const currentScroll = window.scrollY;
+
+        if (!header) return;
+
+        // Scroll hacia abajo → ocultar con fade + slide
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            header.style.transform = "translateY(-100%)";
+            header.style.opacity = "0";
+        } 
+        // Scroll hacia arriba → mostrar
+        else {
+            header.style.transform = "translateY(0)";
+            header.style.opacity = "1";
+        }
+
+        lastScroll = currentScroll;
+    });
+    
 
     btn?.addEventListener("click", () => {
         isOpen = !isOpen;
