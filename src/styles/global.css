@@ -1,35 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Mode (Default) */
-  --void-val: #ffffff;
-  --surface-val: #f1f5f9;
+  /* Light Mode */
+  --void-val: #f8f3eb;          /* fondo hueso */
+  --surface-val: #efe7dc;       /* cards hueso */
 
-  /* CAMBIO PRINCIPAL: azul/cyan */
-  --primary-val: #0ea5e9;        /* sky blue moderno */
-  --primary-dark-val: #0369a1;   /* azul profundo */
+  /* tonos café */
+  --primary-val: #8b5e3c;       
+  --primary-dark-val: #6f4527;
 
-  --secondary-val: #06b6d4;      /* cyan */
-  --secondary-dark-val: #0891b2;
+  --secondary-val: #b08968;
+  --secondary-dark-val: #8d6748;
 
-  --body-val: #0f172a;
-  --muted-val: #64748b;
+  /* texto café */
+  --body-val: #3e2c1c;
+  --muted-val: #7a6450;
 }
 
 :root.dark {
-  /* Dark modern */
-  --void-val: #020617;          /* fondo oscuro */
-  --surface-val: #0b1220;       /* cards */
+  /* Dark elegante */
+  --void-val: #15120f;
+  --surface-val: #211c18;
 
-  /* swaping to blue insano xd */
-  --primary-val: #00e5ff;       /* CYAN NEON */
-  --primary-dark-val: #009dff;
+  /* cafés cálidos */
+  --primary-val: #d2b48c;
+  --primary-dark-val: #b08968;
 
-  --secondary-val: #38bdf8;     /* azul claro */
-  --secondary-dark-val: #2563eb;
+  --secondary-val: #e6ccb2;
+  --secondary-dark-val: #c69c72;
 
-  --body-val: #e2e8f0;
-  --muted-val: #94a3b8;
+  /* texto clarito */
+  --body-val: #f5ede3;
+  --muted-val: #c7b8a3;
 }
 
 @theme {
