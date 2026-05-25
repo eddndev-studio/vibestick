@@ -1,4 +1,6 @@
 ---
+import { logo } from "../lib/assets";
+
 const title = "Vibe sticker";
 
 const links = [
@@ -24,8 +26,8 @@ const { pathname } = Astro.url;
     >
             <!-- Logos agrupados -->
             <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <img src="/assets/logo.png" alt={title} class="h-10 md:h-14 w-auto object-contain" />
-                <img src="/assets/logo2.png" alt={title} class="h-8 md:h-10 w-auto opacity-80 object-contain" />
+                <img src={logo("logo.png")} alt={title} class="h-10 md:h-14 w-auto object-contain" />
+                <img src={logo("logo2.png")} alt={title} class="h-8 md:h-10 w-auto opacity-80 object-contain" />
             </a>
 
         <!-- Desktop Navigation -->
