@@ -1,4 +1,6 @@
 ---
+import { logo } from "../lib/assets";
+
 const today = new Date();
 
 const navLinks = [
@@ -24,8 +26,8 @@ const navLinks = [
             <div class="flex flex-col items-center md:items-start gap-5">
 
                 <div class="flex items-center gap-3">
-                    <img 
-                        src="/assets/logo.png" 
+                    <img
+                        src={logo("logo.png")}
                         class="h-12 md:h-14 object-contain"
                     />
 
