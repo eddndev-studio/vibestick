@@ -273,6 +273,26 @@
     :global(.leaflet-control-zoom a:hover) {
         background: rgba(30, 35, 60, 0.95) !important;
     }
+
+    /* Alcaldía image markers */
+    :global(.alcaldia-marker) {
+        pointer-events: none;
+        background: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    :global(.alcaldia-marker img) {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85))
+            drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
+        pointer-events: none;
+        user-select: none;
+    }
 </style>
 
 <script>
@@ -281,6 +301,29 @@
     import { ScrollTrigger } from "gsap/ScrollTrigger";
 
     gsap.registerPlugin(ScrollTrigger);
+
+    // --- Alcaldía image map (NOMGEO → asset path) ---
+    const alcaldiaImages: Record<string, string> = {
+        Azcapotzalco: "/assets/images/alcaldias/azcapotzalco.png",
+        "Benito Juárez": "/assets/images/alcaldias/benito-juarez.png",
+        Coyoacán: "/assets/images/alcaldias/coyoacan.png",
+        "Cuajimalpa de Morelos":
+            "/assets/images/alcaldias/cuajimalpa-de-morelos.png",
+        Cuauhtémoc: "/assets/images/alcaldias/cuauhtemoc.png",
+        "Gustavo A. Madero": "/assets/images/alcaldias/gustavo-a-madero.png",
+        Iztacalco: "/assets/images/alcaldias/iztacalco.png",
+        Iztapalapa: "/assets/images/alcaldias/iztapalapa.png",
+        "La Magdalena Contreras":
+            "/assets/images/alcaldias/la-magdalena-contreras.png",
+        "Miguel Hidalgo": "/assets/images/alcaldias/miguel-hidalgo.png",
+        "Milpa Alta": "/assets/images/alcaldias/milpa-alta.png",
+        Tlalpan: "/assets/images/alcaldias/tlalpan.png",
+        Tláhuac: "/assets/images/alcaldias/tlahuac.png",
+        "Venustiano Carranza":
+            "/assets/images/alcaldias/venustiano-carranza.png",
+        Xochimilco: "/assets/images/alcaldias/xochimilco.png",
+        "Álvaro Obregón": "/assets/images/alcaldias/alvaro-obregon.png",
+    };
 
     // --- Pollution Data (SEDEMA/RAMA annual averages, mapped to alcaldías) ---
     const pollutionData: Record<
@@ -342,6 +385,59 @@
     let currentPollutant: "pm25" | "pm10" = "pm25";
     let geojsonLayer: L.GeoJSON | null = null;
     let mapInstance: L.Map | null = null;
+
+    // --- Polygon centroid (area-weighted) — better than bbox center for irregular shapes ---
+    function ringSignedArea(ring: number[][]): number {
+        let A = 0;
+        for (let i = 0; i < ring.length - 1; i++) {
+            const [x1, y1] = ring[i];
+            const [x2, y2] = ring[i + 1];
+            A += x1 * y2 - x2 * y1;
+        }
+        return A / 2;
+    }
+
+    function ringCentroid(ring: number[][]): [number, number] {
+        let xSum = 0;
+        let ySum = 0;
+        let A = 0;
+        for (let i = 0; i < ring.length - 1; i++) {
+            const [x1, y1] = ring[i];
+            const [x2, y2] = ring[i + 1];
+            const c = x1 * y2 - x2 * y1;
+            A += c;
+            xSum += (x1 + x2) * c;
+            ySum += (y1 + y2) * c;
+        }
+        A /= 2;
+        return [xSum / (6 * A), ySum / (6 * A)];
+    }
+
+    function featureCentroid(feature: GeoJSON.Feature): L.LatLngExpression | null {
+        const g: any = feature.geometry;
+        if (!g) return null;
+        if (g.type === "Polygon") {
+            const [lng, lat] = ringCentroid(g.coordinates[0]);
+            return [lat, lng];
+        }
+        if (g.type === "MultiPolygon") {
+            let best: number[][] | null = null;
+            let bestA = 0;
+            for (const poly of g.coordinates) {
+                const ring = poly[0];
+                const a = Math.abs(ringSignedArea(ring));
+                if (a > bestA) {
+                    bestA = a;
+                    best = ring;
+                }
+            }
+            if (best) {
+                const [lng, lat] = ringCentroid(best);
+                return [lat, lng];
+            }
+        }
+        return null;
+    }
 
     // --- Info Panel Update ---
     function updateInfoPanel(name: string) {
@@ -459,6 +555,36 @@
                     style: getStyle,
                     onEachFeature: onEachFeature,
                 }).addTo(mapInstance!);
+
+                // Add image markers at each alcaldía's centroid
+                geojsonLayer.eachLayer((layer) => {
+                    const feature = (layer as any).feature as
+                        | GeoJSON.Feature
+                        | undefined;
+                    const name = feature?.properties?.NOMGEO as
+                        | string
+                        | undefined;
+                    if (!name) return;
+                    const img = alcaldiaImages[name];
+                    if (!img) return;
+
+                    const center =
+                        featureCentroid(feature!) ??
+                        (layer as L.Polygon).getBounds().getCenter();
+
+                    const icon = L.divIcon({
+                        className: "alcaldia-marker",
+                        html: `<img src="${img}" alt="${name}" loading="lazy" draggable="false" />`,
+                        iconSize: [68, 68],
+                        iconAnchor: [34, 34],
+                    });
+
+                    L.marker(center, {
+                        icon,
+                        interactive: false,
+                        keyboard: false,
+                    }).addTo(mapInstance!);
+                });
             });
     }
 
