@@ -1,50 +1,53 @@
 ---
+const TIKTOK_HANDLE = "nano_tech_air";
+
+const featuredId = "7643592724154682642";
+
 const videos = [
     {
-        id: "7593863567615479048",
-        tag: "Tecnología",
+        id: "7638101440690408724",
+        tag: "Humor",
         tagColor: "primary",
-        title: "¿Cómo funciona?",
+        title: "Libertad creativa",
         description:
-            "Aprende sobre la reacción química que permite a nuestras nanopartículas de TiO₂ purificar el aire usando solo luz.",
-        cta: "Ver explicación",
-    },
-    {
-        id: "7600955230590749960",
-        tag: "Branding",
-        tagColor: "secondary",
-        title: "Beneficios de Eheco Stick",
-        description:
-            "Descubre nuestra esencia y cómo estamos cambiando la forma de decorar y purificar tus espacios favoritos.",
+            "Cuando al equipo de marketing le dan libertad creativa total. Spoiler: el resultado es viral.",
         cta: "Ver en TikTok",
     },
     {
-        id: "7603902083313454354",
-        tag: "Impacto",
-        tagColor: "primary",
-        title: "El efecto VibeSticker",
-        description:
-            "Conoce por qué VibeSticker es más que un simple sticker: es un purificador pasivo que mejora tu entorno.",
-        cta: "Ver video",
-    },
-    {
-        id: "7607298667430628629",
-        tag: "Innovación",
+        id: "7637924837570120967",
+        tag: "Branding",
         tagColor: "secondary",
-        title: "Tecnología de Purificación",
+        title: "Detrás del producto",
         description:
-            "Descubre el poder de la fotocatalisis en acción y cómo limpia el aire de tu habitación.",
+            "Un vistazo rápido a lo que estamos construyendo desde Ciudad de México para el mundo.",
         cta: "Ver video",
     },
     {
-        // El tercer link que nos proporcionó el usuario, que resulta ser el mismo que el segundo
-        id: "7600955230590749960",
+        id: "7636472729864080658",
+        tag: "Marketing",
+        tagColor: "primary",
+        title: "Marketing digital",
+        description:
+            "Cómo estamos llevando Nano Tech Air al mercado con campañas hechas por jóvenes emprendedores.",
+        cta: "Ver video",
+    },
+    {
+        id: "7634284896856444180",
+        tag: "Equipo",
+        tagColor: "secondary",
+        title: "El camino del emprendimiento",
+        description:
+            "Un logro importante para todo el equipo rumbo al primer lugar en Junior Achievement México.",
+        cta: "Ver video",
+    },
+    {
+        id: "7612564035124481300",
         tag: "Comunidad",
         tagColor: "primary",
-        title: "Únete al Movimiento",
+        title: "¿La Oficina, temporada 2?",
         description:
-            "Sé parte de VibeSticker y ayuda a crear espacios más limpios y con más estilo.",
-        cta: "Ver video",
+            "Nuestra versión muy mexicana de The Office. Síguenos en TikTok para más contenido del equipo.",
+        cta: "Ver en TikTok",
     },
 ];
 ---
@@ -148,7 +151,7 @@ const videos = [
                     class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                 >
                     <a
-                        href="https://www.tiktok.com/@vibe.stick4"
+                        href={`https://www.tiktok.com/@${TIKTOK_HANDLE}`}
                         target="_blank"
                         class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-bold hover:opacity-90 transition-all flex items-center justify-center gap-2"
                     >
@@ -173,7 +176,7 @@ const videos = [
                 >
                     <iframe
                         sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-top-navigation allow-same-origin"
-                        src="https://www.tiktok.com/embed/v2/7600489649970203911?lang=es-ES"
+                        src={`https://www.tiktok.com/embed/v2/${featuredId}?lang=es-ES`}
                         style="width: 100%; height: 728px; display: block; max-height: 728px;"
                         loading="lazy"></iframe>
                 </div>
@@ -219,7 +222,7 @@ const videos = [
                                 {video.description}
                             </p>
                             <a
-                                href={`https://www.tiktok.com/@vibe.stick4/video/${video.id}`}
+                                href={`https://www.tiktok.com/@${TIKTOK_HANDLE}/video/${video.id}`}
                                 target="_blank"
                                 class="mt-auto w-full flex items-center justify-center gap-2 text-sm font-bold border border-white/10 text-muted hover:text-white px-4 py-3 rounded-xl hover:bg-white/5 hover:border-white/20 transition-all duration-300"
                             >
