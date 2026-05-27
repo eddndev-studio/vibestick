@@ -17,15 +17,15 @@ const { pathname } = Astro.url;
 
 <header
     id="main-header"
-   class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-void/80 backdrop-blur-xl" 
+   class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-[#3e2c1c]/10 bg-[#f8f3eb]/90 backdrop-blur-xl"
 >
     <nav
-        class="max-w-[1600px] mx-auto flex items-center justify-between px-4 py-4 md:px-8"
+        class="max-w-[1600px] mx-auto flex items-center justify-between px-4 py-2 md:px-8 md:py-3"
     >
-            <!-- Logos agrupados, aumento de tamaño -->
-            <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <img src="/assets/logo.png" alt={title} class="h-15 md:h-18 w-auto object-contain" />
-                <img src="/assets/logo2.png" alt={title} class="h-10 md:h-14 w-auto opacity-80 object-contain" />
+            <!-- Logos agrupados -->
+            <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <img src="/assets/logo.png" alt={title} class="h-10 md:h-14 w-auto object-contain" />
+                <img src="/assets/logo2.png" alt={title} class="h-8 md:h-10 w-auto opacity-80 object-contain" />
             </a>
 
         <!-- Desktop Navigation -->
@@ -35,7 +35,7 @@ const { pathname } = Astro.url;
                     return (
                         <a
                             href={link.href}
-                            class="text-sm font-light uppercase transition-colors relative py-1 text-muted hover:text-white"
+                            class="text-sm font-light uppercase transition-colors relative py-1 text-[#7a6450] hover:text-[#3e2c1c]"
                         >
                             {link.label}
                         </a>
@@ -45,11 +45,11 @@ const { pathname } = Astro.url;
         </div>
 
         <!-- Social Icons (Desktop) -->
-        <div class="hidden md:flex gap-4 items-center text-muted">
+        <div class="hidden md:flex gap-4 items-center text-[#7a6450]">
             <a
                 href="https://www.instagram.com/vibestick0/"
                 target="_blank"
-                class="hover:text-secondary hover:scale-110 transition-all"
+                class="hover:text-[#8b5e3c] hover:scale-110 transition-all"
                 aria-label="Instagram"
             >
                 <svg
@@ -66,7 +66,7 @@ const { pathname } = Astro.url;
             <a
                 href="https://www.tiktok.com/@vibe.stick4?lang=es-419"
                 target="_blank"
-                class="hover:text-secondary hover:scale-110 transition-all"
+                class="hover:text-[#8b5e3c] hover:scale-110 transition-all"
                 aria-label="TikTok"
             >
                 <svg
@@ -88,13 +88,13 @@ const { pathname } = Astro.url;
             class="md:hidden flex flex-col gap-1.5 p-2 group"
             aria-label="Abrir menú"
         >            <span
-                class="hamburger-line w-6 h-[2px] bg-white transition-all duration-300 origin-center"
+                class="hamburger-line w-6 h-[2px] bg-[#3e2c1c] transition-all duration-300 origin-center"
             ></span>
             <span
-                class="hamburger-line w-6 h-[2px] bg-white transition-all duration-300"
+                class="hamburger-line w-6 h-[2px] bg-[#3e2c1c] transition-all duration-300"
             ></span>
             <span
-                class="hamburger-line w-4 h-[2px] bg-white transition-all duration-300 origin-center ml-auto"
+                class="hamburger-line w-4 h-[2px] bg-[#3e2c1c] transition-all duration-300 origin-center ml-auto"
             ></span>
         </button>
     </nav>
@@ -104,7 +104,7 @@ const { pathname } = Astro.url;
 <div
     id="mobile-menu"
     class="md:hidden fixed left-0 right-0 bottom-0 bg-void/95 backdrop-blur-xl translate-x-full transition-transform duration-500 ease-out z-40"
-    style="top: 65px;"
+    style="top: 56px;"
 >
     <div class="flex flex-col items-center justify-center h-full gap-8">
         {
